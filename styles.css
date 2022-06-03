@@ -23,6 +23,12 @@ li {
   line-height: 1;
   list-style: none;
 }
+.sign {
+  display: block;
+  margin: 0 auto;
+  max-width: 800px;
+  font-size: small;
+}
 .temperature {
   color: rgb(33, 33, 33);
   font-size: 64px;
@@ -38,6 +44,6 @@ li {
   border: 1px solid #dadde1;
   border-radius: 10px;
   padding: 15px;
-  margin: 20px auto;
+  margin: 20px auto 0;
   max-width: 800px;
 }

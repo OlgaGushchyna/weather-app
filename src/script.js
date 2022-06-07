@@ -29,7 +29,13 @@ function showCityName(event) {
   if (input.value !== "") {
     let cityName = input.value;
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`;
-    axios.get(apiUrl).then(showTemperature);
+    axios
+      .get(apiUrl)
+      .then(showTemperature)
+      .catch(function (error) {
+        console.log(error);
+        alert("City is not found");
+      });
   }
 }
 //https://api.openweathermap.org/data/2.5/weather?q=Y&units=metric&appid=110fd0984645efd6578b5e387d5ecc74

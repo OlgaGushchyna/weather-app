@@ -38,7 +38,6 @@ function showCityName(event) {
       });
   }
 }
-//https://api.openweathermap.org/data/2.5/weather?q=Y&units=metric&appid=110fd0984645efd6578b5e387d5ecc74
 
 https: function showCelsiusTemp(response) {
   let temp = Math.round(response.data.main.temp);
@@ -68,7 +67,8 @@ function showTemperature(response) {
   let descriptionElement = document.querySelector("#description");
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
-  let currentDayTime = document.querySelector(".corrent-daytime");
+  let currentDayTime = document.querySelector("#corrent-daytime");
+  let iconElement = document.querySelector("#icon");
 
   currentDayTime.innerHTML = fotmatDate(response.data.dt * 1000);
   showCity.innerHTML = response.data.name;
@@ -76,6 +76,11 @@ function showTemperature(response) {
   descriptionElement.innerHTML = response.data.weather[0].description;
   humidityElement.innerHTML = response.data.main.humidity;
   windElement.innerHTML = Math.round(response.data.wind.speed);
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
 //Current position

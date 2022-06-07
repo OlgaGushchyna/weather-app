@@ -32,12 +32,18 @@ li:first-letter {
   max-width: 800px;
   font-size: small;
 }
-.temperature {
+.temperature img {
+  margin-right: 5px;
+  height: 64px;
+  width: 64px;
+}
+.temperature strong {
   color: rgb(33, 33, 33);
   font-size: 64px;
   font-weight: 400;
   line-height: 1;
 }
+
 .units {
   position: relative;
   top: -34px;

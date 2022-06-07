@@ -19,25 +19,22 @@ function fotmatDate(timestemp) {
   if (minute < 10) {
     minute = "0" + minute;
   }
-
-  let message = `${days[date.getDay()]} ${hour}:${minute}`;
-  return message;
+  let day = days[date.getDay()];
+  return `${day} ${hour}:${minute}`;
 }
 
 function showCityName(event) {
   event.preventDefault();
   let input = document.querySelector("#city-name");
   if (input.value !== "") {
-    let showCity = document.querySelector("#show-city");
     let cityName = input.value;
-    cityName = cityName.charAt(0).toUpperCase() + cityName.slice(1);
-    showCity.innerHTML = cityName;
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`;
-    axios.get(apiUrl).then(showCelsiusTemp);
+    axios.get(apiUrl).then(showTemperature);
   }
 }
+//https://api.openweathermap.org/data/2.5/weather?q=Y&units=metric&appid=110fd0984645efd6578b5e387d5ecc74
 
-function showCelsiusTemp(response) {
+https: function showCelsiusTemp(response) {
   let temp = Math.round(response.data.main.temp);
   let tempElement = document.querySelector("#temperature");
   tempElement.innerHTML = temp;

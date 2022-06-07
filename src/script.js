@@ -1,5 +1,5 @@
 const apiKey = "110fd0984645efd6578b5e387d5ecc74";
-
+let celsiusTemp = null;
 function fotmatDate(timestemp) {
   let date = new Date(timestemp);
   let days = [
@@ -39,27 +39,28 @@ function showCityName(event) {
   }
 }
 
-https: function showCelsiusTemp(response) {
-  let temp = Math.round(response.data.main.temp);
+function showCelsiusTemp(event) {
+  event.preventDefault();
   let tempElement = document.querySelector("#temperature");
-  tempElement.innerHTML = temp;
+  tempElement.innerHTML = Math.round(celsiusTemp);
 }
 
-function showFarengateTemp() {
+function showFahrenheitTemp(event) {
+  event.preventDefault();
   let temp = document.querySelector("#temperature");
-  let Temp = parseInt(temp.textContent);
-  let fahrenheitTemp = Math.round((Temp * 9) / 5 + 32);
-  temp.innerHTML = fahrenheitTemp;
+  let fahrenheitTemp = (celsiusTemp * 9) / 5 + 32;
+  temp.innerHTML = Math.round(fahrenheitTemp);
 }
 
 // Name form
 let searchCityForm = document.querySelector("#search-city");
 searchCityForm.addEventListener("submit", showCityName);
 
-let celsiusTemp = document.querySelector("#celsius");
-celsiusTemp.addEventListener("click", showCelsiusTemp);
-let farengateTemp = document.querySelector("#farengate");
-farengateTemp.addEventListener("click", showFarengateTemp);
+let fahrenheitLink = document.querySelector("#fahrenheit");
+fahrenheitLink.addEventListener("click", showFahrenheitTemp);
+
+let celsiusLink = document.querySelector("#celsius");
+celsiusLink.addEventListener("click", showCelsiusTemp);
 
 function showTemperature(response) {
   let showCity = document.querySelector("#show-city");
@@ -69,6 +70,8 @@ function showTemperature(response) {
   let windElement = document.querySelector("#wind");
   let currentDayTime = document.querySelector("#corrent-daytime");
   let iconElement = document.querySelector("#icon");
+
+  celsiusTemp = response.data.main.temp;
 
   currentDayTime.innerHTML = fotmatDate(response.data.dt * 1000);
   showCity.innerHTML = response.data.name;

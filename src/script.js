@@ -53,8 +53,8 @@ function showFarengateTemp() {
 }
 
 // Name form
-let nameCity = document.querySelector("#search-city");
-nameCity.addEventListener("submit", showCityName);
+let searchCityForm = document.querySelector("#search-city");
+searchCityForm.addEventListener("submit", showCityName);
 
 let celsiusTemp = document.querySelector("#celsius");
 celsiusTemp.addEventListener("click", showCelsiusTemp);
@@ -89,6 +89,8 @@ function showPosition(position) {
   let long = position.coords.longitude;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(showTemperature);
+  let input = document.querySelector("#city-name");
+  input.value = "";
 }
 
 function showcurrentPlaceTemp() {

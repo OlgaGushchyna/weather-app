@@ -54,10 +54,10 @@
           </div>
         </form>
         <br />
-        <h1 id="show-city">Lisbon</h1>
+        <h1 id="show-city"></h1>
         <ul>
-          <li><span class="corrent-daytime">Sunday 18:56</span></li>
-          <li>Clouds</li>
+          <li><span class="corrent-daytime"></span></li>
+          <li id="description"></li>
         </ul>
 
         <div class="row">
@@ -65,7 +65,7 @@
             <div class="clearfix">
               <img src="cloud.png" class="float-start" />
               <div class="float-start">
-                <span class="temperature">19</span>
+                <span id="temperature" class="temperature"></span>
                 <span class="units"
                   ><a href="#" id="celsius"> °C </a>|
                   <a href="#" id="farengate">°F</a></span
@@ -75,9 +75,8 @@
           </div>
           <div class="col-6">
             <ul>
-              <li>Precipitation: 76%</li>
-              <li>Humidity: 95%</li>
-              <li>Wind: 3 m/s</li>
+              <li>Humidity: <span id="humidity"></span> %</li>
+              <li>Wind: <span id="wind"></span> km/h</li>
             </ul>
           </div>
         </div>

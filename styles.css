@@ -22,6 +22,7 @@ li {
   height: 19px;
   line-height: 1;
   list-style: none;
+  text-transform: capitalize;
 }
 .sign {
   display: block;

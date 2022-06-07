@@ -43,6 +43,8 @@ function showCelsiusTemp(event) {
   event.preventDefault();
   let tempElement = document.querySelector("#temperature");
   tempElement.innerHTML = Math.round(celsiusTemp);
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
 }
 
 function showFahrenheitTemp(event) {
@@ -50,6 +52,8 @@ function showFahrenheitTemp(event) {
   let temp = document.querySelector("#temperature");
   let fahrenheitTemp = (celsiusTemp * 9) / 5 + 32;
   temp.innerHTML = Math.round(fahrenheitTemp);
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
 }
 
 // Name form

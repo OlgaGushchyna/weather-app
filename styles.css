@@ -44,6 +44,12 @@ li:first-letter {
   line-height: 1;
 }
 
+.temperature .active {
+  color: rgb(33, 33, 33);
+  text-decoration: none;
+  cursor: default;
+}
+
 .units {
   position: relative;
   top: -34px;

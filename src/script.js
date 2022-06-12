@@ -23,6 +23,25 @@ function fotmatDate(timestemp) {
   return `${day} ${hour}:${minute}`;
 }
 
+function displayFofecast() {
+  let forecastelement = document.querySelector("#weather-forecast-temp");
+  let forecaseHTML = `<div class="row">`;
+  forecaseHTML += `<div class="weather-forecast-background col-2">
+              <div class="weather-forecast-date text-secondary">Mon</div>
+              <img
+                src="http://openweathermap.org/img/wn/50d@2x.png"
+                width="42"
+              />
+              <div class="weather-forecast-temps text-secondary">
+                <strong class="weather-forecast-temps-max">16°</strong>
+                <span class="weather-forecast-temps-min">10°</span>
+              </div>
+            </div>`;
+
+  forecaseHTML += `</div>`;
+  forecastelement.innerHTML = forecaseHTML;
+}
+
 function showCityName(event) {
   event.preventDefault();
   let input = document.querySelector("#city-name");
@@ -108,3 +127,4 @@ let currentPlaceTemp = document.getElementById("search-city").place;
 currentPlaceTemp.addEventListener("click", showcurrentPlaceTemp);
 
 showcurrentPlaceTemp();
+displayFofecast();

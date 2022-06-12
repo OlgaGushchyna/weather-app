@@ -33,6 +33,10 @@ li:first-letter {
   margin-left: 10px;
 }
 
+.city:hover {
+  cursor: pointer;
+}
+
 .sign {
   display: block;
   margin: 0 auto;

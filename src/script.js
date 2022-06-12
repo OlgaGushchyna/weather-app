@@ -1,6 +1,6 @@
 const apiKey = "110fd0984645efd6578b5e387d5ecc74";
 let celsiusTemp = null;
-function fotmatDate(timestemp) {
+function formatDate(timestemp) {
   let date = new Date(timestemp);
   let days = [
     "Sunday",
@@ -30,7 +30,6 @@ function formatDay(timestemp) {
 }
 
 function displayForecast(response) {
-  console.log(response.data.daily);
   let forecast = response.data.daily;
   let forecastelement = document.querySelector("#weather-forecast-temp");
 
@@ -68,20 +67,29 @@ function getForecast(coordinates) {
   axios.get(apiUrl).then(displayForecast);
 }
 
-function showCityName(event) {
+function getCityName(event) {
   event.preventDefault();
   let input = document.querySelector("#city-name");
   if (input.value !== "") {
     let cityName = input.value;
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`;
-    axios
-      .get(apiUrl)
-      .then(showTemperature)
-      .catch(function (error) {
-        console.log(error);
-        alert("City is not found");
-      });
+    showCityName(cityName);
   }
+}
+
+function showCityName(cityName) {
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`;
+  axios
+    .get(apiUrl)
+    .then(showTemperature)
+    .catch(function (error) {
+      console.log(error);
+      alert("City is not found");
+    });
+}
+
+function chooseCity(event) {
+  event.preventDefault();
+  showCityName(event.path[0].childNodes[0].data);
 }
 
 function showCelsiusTemp(event) {
@@ -103,13 +111,22 @@ function showFahrenheitTemp(event) {
 
 // Name form
 let searchCityForm = document.querySelector("#search-city");
-searchCityForm.addEventListener("submit", showCityName);
+searchCityForm.addEventListener("submit", getCityName);
 
 let fahrenheitLink = document.querySelector("#fahrenheit");
 fahrenheitLink.addEventListener("click", showFahrenheitTemp);
 
 let celsiusLink = document.querySelector("#celsius");
 celsiusLink.addEventListener("click", showCelsiusTemp);
+
+let cityLisbon = document.getElementById("lisbon-city");
+cityLisbon.addEventListener("click", chooseCity);
+let cityParis = document.getElementById("paris-city");
+cityParis.addEventListener("click", chooseCity);
+let citySydney = document.getElementById("sydney-city");
+citySydney.addEventListener("click", chooseCity);
+let citySanFrancisco = document.getElementById("sanfrancisco-city");
+citySanFrancisco.addEventListener("click", chooseCity);
 
 function showTemperature(response) {
   let showCity = document.querySelector("#show-city");
@@ -122,7 +139,7 @@ function showTemperature(response) {
 
   celsiusTemp = response.data.main.temp;
 
-  currentDayTime.innerHTML = fotmatDate(response.data.dt * 1000);
+  currentDayTime.innerHTML = formatDate(response.data.dt * 1000);
   showCity.innerHTML = response.data.name;
   tempShow.innerHTML = Math.round(response.data.main.temp);
   descriptionElement.innerHTML = response.data.weather[0].description;

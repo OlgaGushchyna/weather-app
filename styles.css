@@ -26,10 +26,17 @@ li {
 li:first-letter {
   text-transform: capitalize;
 }
+.cities {
+  margin-left: -5px;
+}
+.cities span {
+  margin-left: 10px;
+}
+
 .sign {
   display: block;
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 600px;
   font-size: small;
 }
 .temperature img {
@@ -58,7 +65,28 @@ li:first-letter {
 .weather-app {
   border: 1px solid #dadde1;
   border-radius: 10px;
-  padding: 15px;
+  padding: 15px 15px 5px 15px;
   margin: 20px auto 0;
-  max-width: 800px;
+  max-width: 600px;
+}
+
+.weather-forecast {
+  margin-top: 20px;
+  text-align: center;
+}
+.weather-forecast-background {
+  border: 1px solid white;
+  border-radius: 10px;
+  padding-bottom: 5px;
+  transition: 5ms;
+}
+.weather-forecast-background:hover {
+  background-color: #ebeef1;
+}
+
+.weather-forecast-date {
+  font-size: 16px;
+}
+.weather-forecast-temps {
+  font-size: 13px;
 }

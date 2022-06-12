@@ -17,14 +17,14 @@
   <body>
     <div class="container">
       <div class="weather-app">
-        <div class="row mt-3 mb-3">
-          <div class="col-1 text-primary">Lisbon</div>
-          <div class="col-1 text-primary">Paris</div>
-          <div class="col-1 text-primary">Sydney</div>
-          <div class="col-2 text-primary">San Francisco</div>
-        </div>
+        <span class="cities">
+          <span class="text-primary">Lisbon</span>
+          <span class="text-primary">Paris</span>
+          <span class="text-primary">Sydney</span>
+          <span class="text-primary">San Francisco</span>
+        </span>
 
-        <form id="search-city" class="row mb-3">
+        <form id="search-city" class="row mb-3 mt-3">
           <div class="col-6">
             <input
               id="city-name"
@@ -79,42 +79,19 @@
             </ul>
           </div>
         </div>
-
-        <div class="row mb-3">
-          <div class="col-sm-2">
-            <div class="text-secondary text-center">Mon</div>
-            <div>
-              <img src="sun.png" class="mt-2 mb-2 rounded mx-auto d-block" />
+        <div class="weather-forecast" id="weather-forecast-temp">
+          <div class="row">
+            <div class="weather-forecast-background col-2">
+              <div class="weather-forecast-date text-secondary">Mon</div>
+              <img
+                src="http://openweathermap.org/img/wn/50d@2x.png"
+                width="42"
+              />
+              <div class="weather-forecast-temps text-secondary">
+                <strong class="weather-forecast-temps-max">16°</strong>
+                <span class="weather-forecast-temps-min">10°</span>
+              </div>
             </div>
-            <div class="text-secondary text-center">16°</div>
-          </div>
-          <div class="col-sm-2">
-            <div class="text-secondary text-center">Tue</div>
-            <div>
-              <img src="sun.png" class="mt-2 mb-2 rounded mx-auto d-block" />
-            </div>
-            <div class="text-secondary text-center">18°</div>
-          </div>
-          <div class="col-sm-2">
-            <div class="text-secondary text-center">Wed</div>
-            <div>
-              <img src="cloud2.png" class="mt-2 mb-2 rounded mx-auto d-block" />
-            </div>
-            <div class="text-secondary text-center">14°</div>
-          </div>
-          <div class="col-sm-2">
-            <div class="text-secondary text-center">Thu</div>
-            <div>
-              <img src="sun.png" class="mt-2 mb-2 rounded mx-auto d-block" />
-            </div>
-            <div class="text-secondary text-center">17°</div>
-          </div>
-          <div class="col-sm-2">
-            <div class="text-secondary text-center">Fri</div>
-            <div>
-              <img src="cloud.png" class="mt-2 mb-2 rounded mx-auto d-block" />
-            </div>
-            <div class="text-secondary text-center">11°</div>
           </div>
         </div>
       </div>

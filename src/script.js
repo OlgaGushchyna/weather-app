@@ -1,5 +1,7 @@
 const apiKey = "110fd0984645efd6578b5e387d5ecc74";
 let celsiusTemp = null;
+let celsiucTempMax = [];
+let celsiucTempMin = [];
 function formatDate(timestemp) {
   let date = new Date(timestemp);
   let days = [
@@ -35,6 +37,8 @@ function displayForecast(response) {
 
   let forecaseHTML = `<div class="row">`;
   forecast.forEach(function (forecaseDay, index) {
+    celsiucTempMax[index] = forecaseDay.temp.max;
+    celsiucTempMin[index] = forecaseDay.temp.min;
     if (index < 6) {
       forecaseHTML += `<div class="weather-forecast-background col-2">
               <div class="weather-forecast-date text-secondary">
@@ -46,9 +50,9 @@ function displayForecast(response) {
                 width="42"
               />
               <div class="weather-forecast-temps text-secondary">
-                <strong class="weather-forecast-temps-max">${Math.round(
+                <strong class="weather-forecast-temps-max" >${Math.round(
                   forecaseDay.temp.max
-                )}°</strong>
+                )} °</strong>                
                 <span class="weather-forecast-temps-min">${Math.round(
                   forecaseDay.temp.min
                 )}°</span>
@@ -98,6 +102,15 @@ function showCelsiusTemp(event) {
   tempElement.innerHTML = Math.round(celsiusTemp);
   celsiusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
+
+  let celsiusMaxLink = document.querySelectorAll(".weather-forecast-temps-max");
+  celsiusMaxLink.forEach(function (celsiusMaxLink, index) {
+    celsiusMaxLink.innerHTML = Math.round(celsiucTempMax[index]) + "°";
+  });
+  let celsiusMinLink = document.querySelectorAll(".weather-forecast-temps-min");
+  celsiusMinLink.forEach(function (celsiusMinLink, index) {
+    celsiusMinLink.innerHTML = Math.round(celsiucTempMin[index]) + "°";
+  });
 }
 
 function showFahrenheitTemp(event) {
@@ -107,6 +120,17 @@ function showFahrenheitTemp(event) {
   temp.innerHTML = Math.round(fahrenheitTemp);
   celsiusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
+
+  let celsiusMaxLink = document.querySelectorAll(".weather-forecast-temps-max");
+  celsiusMaxLink.forEach(function (celsiusMaxLink, index) {
+    celsiusMaxLink.innerHTML =
+      Math.round((celsiucTempMax[index] * 9) / 5 + 32) + "°";
+  });
+  let celsiusMinLink = document.querySelectorAll(".weather-forecast-temps-min");
+  celsiusMinLink.forEach(function (celsiusMinLink, index) {
+    celsiusMinLink.innerHTML =
+      Math.round((celsiucTempMin[index] * 9) / 5 + 32) + "°";
+  });
 }
 
 // Name form

@@ -23,7 +23,8 @@ function fotmatDate(timestemp) {
   return `${day} ${hour}:${minute}`;
 }
 
-function displayFofecast() {
+function displayFofecast(response) {
+  console.log(response.data.daily);
   let forecastelement = document.querySelector("#weather-forecast-temp");
   let forecaseHTML = `<div class="row">`;
   forecaseHTML += `<div class="weather-forecast-background col-2">
@@ -40,6 +41,13 @@ function displayFofecast() {
 
   forecaseHTML += `</div>`;
   forecastelement.innerHTML = forecaseHTML;
+}
+
+function getForecast(coordinates) {
+  let lat = coordinates.lat;
+  let lon = coordinates.lon;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayFofecast);
 }
 
 function showCityName(event) {
@@ -107,6 +115,8 @@ function showTemperature(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
+
+  getForecast(response.data.coord);
 }
 
 //Current position
@@ -127,4 +137,3 @@ let currentPlaceTemp = document.getElementById("search-city").place;
 currentPlaceTemp.addEventListener("click", showcurrentPlaceTemp);
 
 showcurrentPlaceTemp();
-displayFofecast();

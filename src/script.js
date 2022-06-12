@@ -23,22 +23,40 @@ function fotmatDate(timestemp) {
   return `${day} ${hour}:${minute}`;
 }
 
-function displayFofecast(response) {
+function formatDay(timestemp) {
+  let date = new Date(timestemp * 1000);
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[date.getDay()];
+}
+
+function displayForecast(response) {
   console.log(response.data.daily);
+  let forecast = response.data.daily;
   let forecastelement = document.querySelector("#weather-forecast-temp");
+
   let forecaseHTML = `<div class="row">`;
-  forecaseHTML += `<div class="weather-forecast-background col-2">
-              <div class="weather-forecast-date text-secondary">Mon</div>
+  forecast.forEach(function (forecaseDay, index) {
+    if (index < 6) {
+      forecaseHTML += `<div class="weather-forecast-background col-2">
+              <div class="weather-forecast-date text-secondary">
+              ${formatDay(forecaseDay.dt)}</div>
               <img
-                src="http://openweathermap.org/img/wn/50d@2x.png"
+                src="http://openweathermap.org/img/wn/${
+                  forecaseDay.weather[0].icon
+                }@2x.png"
                 width="42"
               />
               <div class="weather-forecast-temps text-secondary">
-                <strong class="weather-forecast-temps-max">16°</strong>
-                <span class="weather-forecast-temps-min">10°</span>
+                <strong class="weather-forecast-temps-max">${Math.round(
+                  forecaseDay.temp.max
+                )}°</strong>
+                <span class="weather-forecast-temps-min">${Math.round(
+                  forecaseDay.temp.min
+                )}°</span>
               </div>
             </div>`;
-
+    }
+  });
   forecaseHTML += `</div>`;
   forecastelement.innerHTML = forecaseHTML;
 }
@@ -47,7 +65,7 @@ function getForecast(coordinates) {
   let lat = coordinates.lat;
   let lon = coordinates.lon;
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayFofecast);
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function showCityName(event) {

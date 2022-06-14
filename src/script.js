@@ -52,7 +52,7 @@ function displayForecast(response) {
               <div class="weather-forecast-temps text-secondary">
                 <strong class="weather-forecast-temps-max" >${Math.round(
                   forecaseDay.temp.max
-                )} °</strong>                
+                )}°</strong>                
                 <span class="weather-forecast-temps-min">${Math.round(
                   forecaseDay.temp.min
                 )}°</span>
@@ -62,6 +62,9 @@ function displayForecast(response) {
   });
   forecaseHTML += `</div>`;
   forecastelement.innerHTML = forecaseHTML;
+  if (fahrenheitLink.classList.contains("active")) {
+    displayFahrenheitTempForecase();
+  }
 }
 
 function getForecast(coordinates) {
@@ -94,6 +97,8 @@ function showCityName(cityName) {
 function chooseCity(event) {
   event.preventDefault();
   showCityName(event.path[0].childNodes[0].data);
+  let input = document.querySelector("#city-name");
+  input.value = "";
 }
 
 function showCelsiusTemp(event) {
@@ -115,12 +120,19 @@ function showCelsiusTemp(event) {
 
 function showFahrenheitTemp(event) {
   event.preventDefault();
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  displayFahrenheitTemp();
+  displayFahrenheitTempForecase();
+}
+
+function displayFahrenheitTemp() {
   let temp = document.querySelector("#temperature");
   let fahrenheitTemp = (celsiusTemp * 9) / 5 + 32;
   temp.innerHTML = Math.round(fahrenheitTemp);
-  celsiusLink.classList.remove("active");
-  fahrenheitLink.classList.add("active");
+}
 
+function displayFahrenheitTempForecase() {
   let celsiusMaxLink = document.querySelectorAll(".weather-forecast-temps-max");
   celsiusMaxLink.forEach(function (celsiusMaxLink, index) {
     celsiusMaxLink.innerHTML =
@@ -162,10 +174,16 @@ function showTemperature(response) {
   let iconElement = document.querySelector("#icon");
 
   celsiusTemp = response.data.main.temp;
+  //celsiusLink.classList.add("active");
+  //fahrenheitLink.classList.remove("active");
 
   currentDayTime.innerHTML = formatDate(response.data.dt * 1000);
   showCity.innerHTML = response.data.name;
-  tempShow.innerHTML = Math.round(response.data.main.temp);
+  if (fahrenheitLink.classList.contains("active")) {
+    displayFahrenheitTemp();
+  } else {
+    tempShow.innerHTML = Math.round(response.data.main.temp);
+  }
   descriptionElement.innerHTML = response.data.weather[0].description;
   humidityElement.innerHTML = response.data.main.humidity;
   windElement.innerHTML = Math.round(response.data.wind.speed);

@@ -173,9 +173,7 @@ function showTemperature(response) {
   let currentDayTime = document.querySelector("#corrent-daytime");
   let iconElement = document.querySelector("#icon");
 
-  celsiusTemp = response.data.main.temp;
-  //celsiusLink.classList.add("active");
-  //fahrenheitLink.classList.remove("active");
+  celsiusTemp = response.data.main.temp;  
 
   currentDayTime.innerHTML = formatDate(response.data.dt * 1000);
   showCity.innerHTML = response.data.name;
